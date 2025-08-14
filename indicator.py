@@ -88,7 +88,7 @@ def generate_indicators(abstracts, reference_df, start=0, stop=-1):
         drug = parse_drug_terms(drug)
 
         results = []
-        for pmid, abstract in tqdm(abstracts[start:stop], desc="Abstracts", leave=False):
+        for pmid, abstract in abstracts[start:stop]:
             label, scores = analyze_relation(drug[0], gene, abstract)
             results.append({"pmid": pmid, "label": label, "scores": scores })
 
