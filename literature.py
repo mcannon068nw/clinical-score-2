@@ -67,7 +67,7 @@ def fetch_abstracts(pmids):
 def fetch_pmids_by_string(term: str) -> List[str]:
     """Return a list of PubMed IDs for a given search term."""
     search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-    params = {"db": "pubmed", "term": term, "retmode": "json", "retmax": 1000}
+    params = {"db": "pubmed", "term": term, "retmode": "json", "retmax": 10000}
     resp = requests.get(search_url, params=params, timeout=10)
     resp.raise_for_status()
     data = resp.json()
@@ -95,7 +95,13 @@ def fetch_pmids_by_ncbi_gene_id(term: str) -> str:
     resp = requests.get(url, params=params, timeout=10)
     resp.raise_for_status()
     data = resp.json()
-    pmids = list(data['PMID'][0:1000]) # TODO: Change the n as needed
+    pmids = None
+    for linkset in data['linksets']:
+        for db in linkset['linksetdbs']:
+            if db['linkname'] == 'gene_pubmed_all':
+                pmids = list(db['links'])
+                pmids = [str(pmid) for pmid in pmids]
+    print(pmids)
     return pmids
 
 # PUBTATOR METHOD (GENE)
