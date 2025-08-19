@@ -23,7 +23,7 @@ CLINICAL_STUDY = {'randomized', 'randomised', 'placebo', 'double-blind', 'single
 
 CASE_REPORT = {'case report', 'case reports', 'case series', 'case study', 'case studies', 'single patient', 'n-of-1'} # Weight = 1
 
-ANIMAL_EVIDENCE = {'in vivo', 'xenograft', 'patient-derived xenograft', 'PDX', 'orthotopic', 'murine', 'mouse', 'mice', 'rat', 'rats', 'zebrafish', 'Drosophila', 'C. elegans', 'animal model', 'live animal', 'preclinical model'} # Weight = 0.5
+ANIMAL_EVIDENCE = {'in vivo', 'xenograft', 'patient-derived xenograft', 'PDX', 'orthotopic', 'murine', 'mouse', 'mice', 'rat', 'rats', 'zebrafish', 'Drosophila', 'C. elegans', 'animal model', 'live animal'} # Weight = 0.5
 
 CELL_LINES = {'in vitro', 'cell line', 'cultured cells', 'cell culture', 'monolayer', '3D culture', 'organoid', 'primary cells', 'immortalized cell line', 'transfected cell line'} # Weight = 0.5
 
@@ -88,7 +88,7 @@ def generate_indicators(abstracts, reference_df, start=0, stop=-1):
         drug = parse_drug_terms(drug)
 
         results = []
-        for pmid, abstract in tqdm(abstracts[start:stop], desc="Abstracts", leave=False):
+        for pmid, abstract in abstracts[start:stop]:
             label, scores = analyze_relation(drug[0], gene, abstract)
             results.append({"pmid": pmid, "label": label, "scores": scores })
 
