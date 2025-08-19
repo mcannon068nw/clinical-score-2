@@ -169,13 +169,13 @@ def generate_interaction_evidence(abstracts, reference_df, start=0, stop=-1):
 
         label,scores = analyze_relation_interaction(gene, abstract)
 
-        results.append({"pmid": pmid, "label": label, "scores": scores, 'tagged_drugs': tagged_drugs, 'concepts': concept  })
+        results.append({"pmid": pmid, 'abstract': abstract, "label": label, "scores": scores, 'tagged_drugs': tagged_drugs, 'concepts': concept  })
 
     os.makedirs(timestamp_folder, exist_ok=True)
     out_filename = f'{gene}_interaction_search.csv'.replace("/", "-")
     out_path = os.path.join(timestamp_folder, out_filename)
     with open(out_path, "w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=["pmid", "label", "scores", 'tagged_drugs', 'concepts'])
+        writer = csv.DictWriter(fh, fieldnames=["pmid",'abstract', "label", "scores", 'tagged_drugs', 'concepts'])
         writer.writeheader()
         writer.writerows(results)
                     
