@@ -57,51 +57,23 @@ CHEMOTHERAPY_AGENTS = {
 
 # ---------- LEMMA-LEVEL LEXICONS (single-token lemmas) ----------
 DIRECT_INTERACTION = {
-    # core
-    "inhibit", "suppress", "block", "antagonize", "antagonist",
-    "activate", "agonist", "stimulate",
-    # expanded
-    "abrogate", "attenuate", "neutralize", "potentiate", "enhance",
-    "impair", "diminish", "abolish"
+    "inhibit", "suppress", "block", "antagonize", "antagonist", "activate", "agonist", "stimulate", "abrogate", "attenuate", "neutralize", "potentiate", "enhance", "impair", "diminish", "abolish"
 }
 
 BINDING_INTERACTION = {
-    # core
-    "bind", "target", "interact", "affinity",
-    # expanded
-    "associate", "association", "complex", "recruit", "sequester",
-    "dock", "occupy", "ligand"
+    "bind", "target", "interact", "affinity", "associate", "association", "complex", "recruit", "sequester", "dock", "occupy", "ligand"
 }
 
 REGULATION_CHANGES = {
-    # core
-    "upregulate", "downregulate", "overexpress", "silence",
-    "knockdown", "knockout", "crispr",
-    # expanded
-    "knockin", "dysregulate", "downmodulate", "repress", "repression",
-    "transactivate", "transactivation", "deplete", "depletion",
-    "induce", "induction"
+    "upregulate", "downregulate", "overexpress", "silence", "knockdown", "knockout", "crispr", "knockin", "dysregulate", "downmodulate", "repress", "repression","transactivate", "transactivation", "deplete", "depletion","induce", "induction"
 }
 
 SENSITIVITY_RESISTANCE = {
-    # core
-    "sensitivity", "sensitive", "sensitize",
-    "resistant", "resistance", "resensitize",
-    "synergy", "synergistic",
-    # expanded
-    "tolerant", "tolerance", "refractory",
-    "respond", "responder", "nonresponder", "response",
-    "hypersensitive"
+    "sensitivity", "sensitive", "sensitize", "resistant", "resistance", "resensitize", "synergy", "synergistic", "tolerant", "tolerance", "refractory", "respond", "responder", "nonresponder", "response", "hypersensitive"
 }
 
 PHARMACOGENOMIC_SIGNALS = {
-    # PK/PD & PGx cues
-    "metabolize", "substrate", "induce", "inducer", "inhibit",  # inhibit appears in DIRECT too; keep if you use per-bucket counts
-    "polymorphism", "variant", "mutation", "mutant",
-    "allele", "genotype", "haplotype", "isoform",
-    "splice", "wildtype", "germline", "somatic",
-    # PK endpoints often used for genotype effects
-    "clearance", "exposure", "auc", "cmax", "tmax"
+    "metabolize", "substrate", "induce", "inducer", "inhibit", "polymorphism", "variant", "mutation", "mutant", "allele", "genotype", "haplotype", "isoform", "splice", "wildtype", "germline", "somatic", "clearance", "exposure", "auc", "cmax", "tmax"
 }
 
 
