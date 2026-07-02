@@ -11,6 +11,8 @@ from .dgilit_models import (
 from .pubmed import (
     PubMedAbstract,
     PubMedAbstractSection,
+    PubMedArticle,
+    PubMedArticleSection,
     PubMedClient,
     PubMedFetchConfig,
     fetch_pubmed_abstracts,
@@ -43,6 +45,8 @@ __all__ = (
     "NormalizedConcept",
     "PubMedAbstract",
     "PubMedAbstractSection",
+    "PubMedArticle",
+    "PubMedArticleSection",
     "PubMedClient",
     "PubMedFetchConfig",
     "PubTator3ChemicalTagger",
