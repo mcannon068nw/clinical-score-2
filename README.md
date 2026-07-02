@@ -40,7 +40,7 @@ For entity pre-tagging with PubTator3, download the required PubTator3 annotatio
 
 ## Example
 
-### PubMed abstract retrieval
+### PubMed article retrieval
 
 Use the convenience function when you want notebook-friendly text keyed by PMID:
 
@@ -55,8 +55,11 @@ abstract_map = fetch_pubmed_abstracts(
 pmid_df["context"] = pmid_df["pmid"].astype(str).map(abstract_map)
 ```
 
-Use the structured client when you want validated Pydantic models with abstract
-sections preserved:
+Use the structured client when you want validated Pydantic article models with
+sections preserved for downstream tagging. PubMed records provide citation
+metadata and abstracts; when a linked PMC record is available, dgiLIT also
+attempts to enrich the article with full-text sections such as Results,
+Discussion, and Conclusions.
 
 ```python
 from dgilit import PubMedClient
@@ -66,12 +69,24 @@ client = PubMedClient(
     batch_size=100,
 )
 
-abstracts = client.fetch_abstracts(["123", "456"])
+articles = client.fetch_articles(["123", "456"], include_full_text=True)
 
-abstract = abstracts["123"]
-print(abstract.pmid)
-print(abstract.sections)
-print(abstract.text)
+article = articles["123"]
+
+print(article.pmid)
+print(article.pmcid)
+print(article.title)
+print(article.full_text_available)
+
+for section in article.sections:
+    print(section.section_type, section.label, section.text)
+    # Run downstream tagging on section.text independently.
+
+results_and_conclusions = [
+    section
+    for section in article.sections
+    if section.section_type in {"results", "conclusions"}
+]
 ```
 
 ### Entity pre-tagging
