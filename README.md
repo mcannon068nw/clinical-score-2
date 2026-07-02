@@ -40,6 +40,42 @@ For entity pre-tagging with PubTator3, download the required PubTator3 annotatio
 
 ## Example
 
+### PubMed abstract retrieval
+
+Use the convenience function when you want notebook-friendly text keyed by PMID:
+
+```python
+from dgilit import fetch_pubmed_abstracts
+
+abstract_map = fetch_pubmed_abstracts(
+    pmid_df["pmid"],
+    email=MC_EMAIL,
+)
+
+pmid_df["context"] = pmid_df["pmid"].astype(str).map(abstract_map)
+```
+
+Use the structured client when you want validated Pydantic models with abstract
+sections preserved:
+
+```python
+from dgilit import PubMedClient
+
+client = PubMedClient(
+    email=MC_EMAIL,
+    batch_size=100,
+)
+
+abstracts = client.fetch_abstracts(["123", "456"])
+
+abstract = abstracts["123"]
+print(abstract.pmid)
+print(abstract.sections)
+print(abstract.text)
+```
+
+### Entity pre-tagging
+
 The example below demonstrates the entity pre-tagging workflow, which identifies and normalizes candidate drug and gene mentions from biomedical text.
 
 ```python
@@ -92,4 +128,3 @@ for entity in result.entities:
 ```
 
 For complete examples including literature retrieval, AI-assisted interaction classification, and evaluation workflows, see the notebooks in the `notebooks/` directory.
-
