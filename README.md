@@ -87,6 +87,8 @@ result = pretagger.tag_block(text)
 # Inspect grounded entities
 for entity in result.entities:
     print(entity)
+
+# LLM Curation Task of Choice
 ```
 
 For complete examples including literature retrieval, AI-assisted interaction classification, and evaluation workflows, see the notebooks in the `notebooks/` directory.
