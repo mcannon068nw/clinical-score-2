@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import http.client
 import urllib.error
 import unittest
 import xml.etree.ElementTree as ET
@@ -255,6 +256,21 @@ class PubMedClientTest(unittest.TestCase):
             article = client.fetch_articles(["123"])["123"]
 
         fetch_pmc.assert_not_called()
+        self.assertIsNone(article.pmcid)
+        self.assertFalse(article.full_text_available)
+        self.assertEqual(article.sections[0].source, "pubmed")
+
+    def test_fetch_articles_falls_back_to_pubmed_when_pmc_xml_is_truncated(self) -> None:
+        client = PubMedClient(request_interval_seconds=0)
+        error = http.client.IncompleteRead(b"partial pmc xml")
+
+        with (
+            patch.object(client, "_fetch_batch", return_value=ET.fromstring(PUBMED_XML)),
+            patch.object(client, "_fetch_pmc_links", return_value={"123": "999"}),
+            patch.object(client, "_fetch_pmc_batch", side_effect=error),
+        ):
+            article = client.fetch_articles(["123"])["123"]
+
         self.assertIsNone(article.pmcid)
         self.assertFalse(article.full_text_available)
         self.assertEqual(article.sections[0].source, "pubmed")
