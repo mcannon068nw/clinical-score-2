@@ -3,8 +3,8 @@
 from collections import Counter
 
 import pandas as pd
-from pubmed import drug_name_recoverable, gene_name_recoverable, normalized_text_contains
-from utils import INTERACTION_COLUMNS, clean_value, collapse_ws
+from notebooks.test_sets.evaluation.pubmed import drug_name_recoverable, gene_name_recoverable, normalized_text_contains
+from notebooks.test_sets.evaluation.utils import INTERACTION_COLUMNS, clean_value, collapse_ws
 
 CURATION_SOURCE_COLUMNS = [
     *INTERACTION_COLUMNS,

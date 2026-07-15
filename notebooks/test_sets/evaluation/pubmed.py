@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 from defusedxml import ElementTree
-from utils import INTERACTION_COLUMNS, clean_value, collapse_ws, norm_text
+from notebooks.test_sets.evaluation.utils import INTERACTION_COLUMNS, clean_value, collapse_ws, norm_text
 
 logger = logging.getLogger(__name__)
 

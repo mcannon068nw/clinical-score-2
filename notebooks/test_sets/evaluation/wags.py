@@ -9,7 +9,7 @@ from typing import Any
 
 import pandas as pd
 from pydantic import BaseModel, ConfigDict
-from utils import clean_value, collapse_ws
+from notebooks.test_sets.evaluation.utils import clean_value, collapse_ws
 
 logger = logging.getLogger(__name__)
 
