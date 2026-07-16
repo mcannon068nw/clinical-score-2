@@ -8,6 +8,16 @@ from .dgilit_models import (
     InteractionClassificationResult,
 )
 
+from .pubmed import (
+    PubMedAbstract,
+    PubMedAbstractSection,
+    PubMedArticle,
+    PubMedArticleSection,
+    PubMedClient,
+    PubMedFetchConfig,
+    fetch_pubmed_abstracts,
+)
+
 from .tagging import (
     BioBertEntityTagger,
     CompositeEntityTagger,
@@ -33,9 +43,16 @@ __all__ = (
     "InteractionClassificationResult",
     "InteractionExtractionInput",
     "NormalizedConcept",
+    "PubMedAbstract",
+    "PubMedAbstractSection",
+    "PubMedArticle",
+    "PubMedArticleSection",
+    "PubMedClient",
+    "PubMedFetchConfig",
     "PubTator3ChemicalTagger",
     "SQLiteNormalizerCache",
     "TaggedTextBlock",
     "TaggerConfig",
     "ViccNormalizer",
+    "fetch_pubmed_abstracts",
 )
