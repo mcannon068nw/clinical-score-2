@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import http.client
 import time
 import urllib.error
 import urllib.parse
@@ -20,6 +21,12 @@ NCBI_ELINK_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi"
 PMC_ID_CONVERTER_URL = "https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/"
 
 SectionSource = Literal["pubmed", "pmc"]
+BEST_EFFORT_PMC_ERRORS = (
+    ET.ParseError,
+    http.client.IncompleteRead,
+    urllib.error.HTTPError,
+    urllib.error.URLError,
+)
 
 
 class PubMedFetchConfig(BaseModel):
@@ -171,7 +178,7 @@ class PubMedClient:
     def _enrich_with_pmc_full_text(self, articles: dict[str, PubMedArticle]) -> None:
         try:
             pmid_to_pmc_uid = self._fetch_pmc_links(list(articles))
-        except (ET.ParseError, urllib.error.HTTPError, urllib.error.URLError):
+        except BEST_EFFORT_PMC_ERRORS:
             return
         if not pmid_to_pmc_uid:
             return
@@ -180,7 +187,7 @@ class PubMedClient:
         for batch in _batched(list(pmc_uid_to_pmid), self.config.batch_size):
             try:
                 root = self._fetch_pmc_batch(batch)
-            except (ET.ParseError, urllib.error.HTTPError, urllib.error.URLError):
+            except BEST_EFFORT_PMC_ERRORS:
                 continue
             for article_xml in root.findall(".//article"):
                 pmc_uid = _extract_pmc_uid(article_xml)
@@ -228,7 +235,7 @@ class PubMedClient:
 
             try:
                 payload = self._get_json(self.config.id_converter_url, params)
-            except (json.JSONDecodeError, urllib.error.HTTPError, urllib.error.URLError):
+            except (json.JSONDecodeError, *BEST_EFFORT_PMC_ERRORS):
                 continue
 
             for record in payload.get("records", []):
@@ -256,7 +263,7 @@ class PubMedClient:
 
             try:
                 root = self._get_xml(self.config.elink_url, params)
-            except (ET.ParseError, urllib.error.HTTPError, urllib.error.URLError):
+            except BEST_EFFORT_PMC_ERRORS:
                 continue
             pmid_to_pmc_uid.update(_parse_pmc_links(root))
 
