@@ -9,7 +9,7 @@ from typing import Any
 
 import pandas as pd
 import requests
-from notebooks.test_sets.evaluation.utils import INTERACTION_COLUMNS, clean_value
+from notebooks.evaluation.utils import INTERACTION_COLUMNS, clean_value
 
 logger = logging.getLogger(__name__)
 

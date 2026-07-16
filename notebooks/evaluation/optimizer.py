@@ -9,9 +9,9 @@ from typing import Any
 
 import pandas as pd
 from pydantic import BaseModel, ConfigDict
-from notebooks.test_sets.evaluation.scoring import score_prediction_dict
-from notebooks.test_sets.evaluation.utils import clean_value, collapse_ws
-from notebooks.test_sets.evaluation.wags import (
+from notebooks.evaluation.scoring import score_prediction_dict
+from notebooks.evaluation.utils import clean_value, collapse_ws
+from notebooks.evaluation.wags import (
     DEFAULT_SYSTEM_PROMPT,
     PROMPT_ABSTRACT_TOKEN,
     PROMPT_PMID_TOKEN,

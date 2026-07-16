@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
-from notebooks.test_sets.evaluation.utils import clean_value, norm_gene, norm_text
+from notebooks.evaluation.utils import clean_value, norm_gene, norm_text
 
 logger = logging.getLogger(__name__)
 

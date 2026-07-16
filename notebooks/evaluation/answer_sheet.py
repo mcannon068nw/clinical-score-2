@@ -3,7 +3,7 @@
 import random
 
 import pandas as pd
-from notebooks.test_sets.evaluation.utils import INTERACTION_COLUMNS, clean_value
+from notebooks.evaluation.utils import INTERACTION_COLUMNS, clean_value
 
 
 def simple_random_sample_pmids(df: pd.DataFrame, n: int, seed: int) -> list[str]:
