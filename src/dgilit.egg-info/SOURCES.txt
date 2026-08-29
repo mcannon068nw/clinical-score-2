@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/dgilit/__init__.py
+src/dgilit/dgilit_models.py
+src/dgilit.egg-info/PKG-INFO
+src/dgilit.egg-info/SOURCES.txt
+src/dgilit.egg-info/dependency_links.txt
+src/dgilit.egg-info/requires.txt
+src/dgilit.egg-info/top_level.txt
+src/dgilit/tagging/__init__.py
+src/dgilit/tagging/models.py
+src/dgilit/tagging/normalizers.py
+src/dgilit/tagging/service.py
+src/dgilit/tagging/taggers.py
